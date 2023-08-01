@@ -35,4 +35,9 @@
     justify-content: center;
     cursor: pointer;
   }
+  p{
+    color: red;
+    
+    font-size: 12px;
+  }
   
