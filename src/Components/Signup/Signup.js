@@ -15,15 +15,23 @@ export default function Signup() {
   let [message, setMessage] = useState("");
   let validation = (e) => {
     setUsername(e.target.value);
-    if (Username.length<5) {
+    if (Username.length < 5) {
       setMessage("Minimum  6 letters");
+    } else {
+      setMessage("");
     }
-    else{
-      setMessage('')
-    }
+  };
+  let isPasswordValid = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    return passwordRegex.test(password);
   };
   let submitHandle = (e) => {
     e.preventDefault();
+    if (!email || !password || !Username || !phone) {
+      alert("Please provide all required information.");
+      return;
+    }
 
     firebase
       .auth()
@@ -31,7 +39,7 @@ export default function Signup() {
       .then((result) => {
         result.user
           .updateProfile({
-            displayName:Username
+            displayName: Username,
           })
           .then(() => {
             firebase
@@ -44,6 +52,9 @@ export default function Signup() {
               })
               .then(() => {
                 history.push("/login");
+              })
+              .catch((error) => {
+                alert("Input the values");
               });
           });
       });
@@ -105,7 +116,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={() => history.push("/Login")}>Login</a>
       </div>
     </div>
   );

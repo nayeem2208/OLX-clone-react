@@ -40,7 +40,7 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-        <span> {user ? user.displayName : 'Login' }</span>
+        <span> {user ? user.displayName : <h6 onClick={()=>history.push('/login')}>Login</h6> }</span>
 
           <hr />
         </div>
@@ -50,10 +50,13 @@ function Header() {
         }}>Logout</span>}
         <div className="sellMenu">
           <SellButton></SellButton>
-          <div className="sellMenuContent">
+          {user?<div className="sellMenuContent" onClick={()=>history.push('/create')}>
             <SellButtonPlus></SellButtonPlus>
             <span>SELL</span>
-          </div>
+          </div>:<div className="sellMenuContent" onClick={()=>history.push('/Login')}>
+            <SellButtonPlus></SellButtonPlus>
+            <span>SELL</span>
+          </div>}
         </div>
       </div>
     </div>
